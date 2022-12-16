@@ -47,9 +47,8 @@ function Login(props) {
         <>
             {(user === null) && <Card style={{ margin: 24, }}>
                 <Card.Header>
-                    <Image src={'https://upload.wikimedia.org/wikipedia/en/thumb/c/c5/Nandos_logo.svg/1200px-Nandos_logo.svg.png'} style={{ width: 80, marginBottom: 8 }} />
-                    <h4>Admin Login</h4>
-                    <p style={{ marginTop: 8, fontSize: 12, color: '#A1A1A1' }}>If you're an admin of Nandos please login below. If you don't have  an account please contact your administrator to get a login.</p>
+                    
+                    <h4>Login</h4>
 
                 </Card.Header>
                 <Card.Body>
@@ -73,16 +72,12 @@ function Login(props) {
                         {/* <p>{user.email}</p> */}
                     </Form>
                 </Card.Body>
-                <Card.Footer>
-
-                    <a href="/" style={{ marginTop: 8, fontSize: 12, }}>← Back to homepage</a>
-                </Card.Footer>
             </Card>}
             {(user !== null) && <div style={{ margin: 24 }}>
                 <p>You're loggedin successfully. Go to <a href="/dashboard">dashboard</a></p>
-                <p><a variant="primary" onClick={
+                <Button variant="primary" onClick={
                     LogoutButtonPressed
-                }>Click here to Logout</a></p>
+                }>Logout</Button>
             </div>}
 
         </>

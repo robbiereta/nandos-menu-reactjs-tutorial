@@ -12,8 +12,8 @@ import Dashboard from './pages/Dashboard';
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route exact path="/" element={<Menu />} />
-      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/menu" element={<Menu />} />
+      <Route exact path="/" element={<Login />} />
       <Route exact path="/dashboard" element={<Dashboard />} />
     </Routes>
   </BrowserRouter>,

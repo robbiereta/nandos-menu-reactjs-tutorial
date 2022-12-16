@@ -9,11 +9,11 @@ function NoLoggedInView(props) {
             <Container>
                 <Row className="align-items-center">
                     <Col>
-                        <Image src={`${notLoggedInImage}`} style={{ width: '80%' }} />
+                        
                     </Col>
                     <Col>
                         <h1>Login Required</h1>
-                        <p>You're not logged in. Please <a href="/login">login</a> first as this access is limited.</p>
+                        <p>You're not logged in. Please <a href="/">login</a> first as this access is limited.</p>
                     </Col>
                 </Row>
             </Container>

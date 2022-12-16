@@ -118,7 +118,16 @@ function Dashboard(props) {
             setIsLoading(false);
         })
     }
-
+    const LogoutButtonPressed = () => {
+        firebase.auth().signOut().then(() => {
+            //Signout Successful
+            alert("Logout Successful")
+            setUser(null);
+            setValidated(false);
+        }).catch((e) => {
+            alert(e.message);
+        })
+    }
     return (
         <>
             {/* <h1>You're not logged in. Please <a href="/login">login</a> first then come to dashboard.</h1> */}
@@ -246,9 +255,15 @@ function Dashboard(props) {
                             </tbody>
                         </Table>
                     </Card.Body>
-                    <Card.Footer className="d-flex justify-content-between align-items-center">
-                        <p style={{ marginTop: 8, fontSize: 12, color: '#A1A1A1' }}>Nandos Menu v1.0.0 - <a href="/login">Logout</a></p>
+                    <Card.Footer>
+                    {(user !== null) && <div style={{ margin: 0 }}>
+                
+                <Button variant="primary" onClick={
+                    LogoutButtonPressed
+                }>Logout</Button>
+            </div>}
                     </Card.Footer>
+                    
                 </Card>
             </>}
         </>
