@@ -44,9 +44,9 @@ function Menu(props) {
                             {(menuItems) && (menuItems.map((menuItem, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{menuItem.doc.data.value.mapValue.fields.itemName.stringValue}</td>
-                                    <td>{menuItem.doc.data.value.mapValue.fields.itemCategory.stringValue}</td>
-                                    <td>{menuItem.doc.data.value.mapValue.fields.itemPrice.doubleValue ? menuItem.doc.data.value.mapValue.fields.itemPrice.doubleValue : menuItem.doc.data.value.mapValue.fields.itemPrice.integerValue}</td>
+                                    <td>{menuItem.doc.data.value.mapValue.fields.folio.stringValue}</td>
+                                    <td>{menuItem.doc.data.value.mapValue.fields.tipoDeuda.stringValue}</td>
+                                    <td>{menuItem.doc.data.value.mapValue.fields.importe.doubleValue ? menuItem.doc.data.value.mapValue.fields.importe.doubleValue : menuItem.doc.data.value.mapValue.fields.importe.integerValue}</td>
                                 </tr>
                             )))}
                         </tbody>

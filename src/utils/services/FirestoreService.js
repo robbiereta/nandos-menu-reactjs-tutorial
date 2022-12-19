@@ -20,12 +20,12 @@ function getAllMenuCategories() {
     })
 }
 
-function AddNewMenuItem(itemName, itemCategory, itemPrice) {
+function AddNewMenuItem(folio, tipoDeuda, importe) {
     return new Promise((resolve, reject) => {
         const data = {
-            "itemName": itemName,
-            "itemCategory": itemCategory,
-            "itemPrice": parseFloat(itemPrice)
+            "folio": folio,
+            "tipoDeuda": tipoDeuda,
+            "importe": parseFloat(importe)
         }
 
         db.collection("MenuItems").add(data).then((docRef) => {
@@ -37,14 +37,14 @@ function AddNewMenuItem(itemName, itemCategory, itemPrice) {
     })
 }
 
-function UpateMenuItem(menuItemID, itemName, itemCategory, itemPrice) {
+function UpateMenuItem(menuItemID, folio, tipoDeuda, importe) {
 
     return new Promise((resolve, reject) => {
 
         const data = {
-            "itemName": itemName,
-            "itemCategory": itemCategory,
-            "itemPrice": parseFloat(itemPrice)
+            "folio": folio,
+            "tipoDeuda": tipoDeuda,
+            "importe": parseFloat(importe)
         }
 
         db.collection("MenuItems").doc(menuItemID).update(data).then(() => {
