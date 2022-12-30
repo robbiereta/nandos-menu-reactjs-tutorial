@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "worldwall-922ad"
-  }
+    "default": "worldwall-922ad",
+    "fire1": "proyecto-c6f98"
+  },
+  "targets": {},
+  "etags": {}
 }

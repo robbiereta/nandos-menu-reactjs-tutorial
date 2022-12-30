@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "result": {
+    "fileName": "google-config.js",
+    "fileContents": "// Copy and paste this into your JavaScript code to initialize the Firebase SDK.\n// You will also need to load the Firebase SDK.\n// See https://firebase.google.com/docs/web/setup for more details.\n\nfirebase.initializeApp({\n  \"projectId\": \"proyecto-c6f98\",\n  \"appId\": \"1:8489633667:web:4d57d0201c4daad5b318b6\",\n  \"databaseURL\": \"https://proyecto-c6f98-default-rtdb.firebaseio.com\",\n  \"storageBucket\": \"proyecto-c6f98.appspot.com\",\n  \"apiKey\": \"AIzaSyDfK50urD2gZuqgVCO4s662se4edn-7Vx8\",\n  \"authDomain\": \"proyecto-c6f98.firebaseapp.com\",\n  \"messagingSenderId\": \"8489633667\",\n  \"measurementId\": \"G-JWGXNE88TH\"\n});\n",
+    "sdkConfig": {
+      "projectId": "proyecto-c6f98",
+      "appId": "1:8489633667:web:4d57d0201c4daad5b318b6",
+      "databaseURL": "https://proyecto-c6f98-default-rtdb.firebaseio.com",
+      "storageBucket": "proyecto-c6f98.appspot.com",
+      "apiKey": "AIzaSyDfK50urD2gZuqgVCO4s662se4edn-7Vx8",
+      "authDomain": "proyecto-c6f98.firebaseapp.com",
+      "messagingSenderId": "8489633667",
+      "measurementId": "G-JWGXNE88TH"
+    }
+  }
+}

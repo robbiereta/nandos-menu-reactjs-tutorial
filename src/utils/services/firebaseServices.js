@@ -1,12 +1,21 @@
-import { db } from '../firestore'
+import { firebaseApp } from '../firebase-config'
+// var db= firebaseApp.database
+import { getDatabase , ref, set ,onValue} from "firebase/database";
+import { getAuth } from "firebase/auth";
+// Initialize Realtime Database and get a reference to the service
+var db = getDatabase(firebaseApp);
+const auth = getAuth();
 
 function getAllMenuItems() {
     return new Promise((resolve, reject) => {
-        db.collection("MenuItems").get().then((allMenuItems) => {
-            resolve(allMenuItems);
-        }).catch((e) => {
-            reject(e);
-        })
+      
+        return onValue(ref(db, '/users/' ), (snapshot) => {
+            const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+            // console.log(username);
+          }, {
+            onlyOnce: true
+          });
+          
     })
 }
 
@@ -20,19 +29,22 @@ function getAllMenuCategories() {
     })
 }
 
-function AddNewMenuItem(folio, tipoDeuda, importe) {
+function AddNewMenuItem(folio, tipoDeuda, importe,userId) {
     return new Promise((resolve, reject) => {
         const data = {
+            "datos":{
+                "nombre":"ruiz"
+            },
+            
+            "deudas":{
+                "pagado":true,
             "folio": folio,
             "tipoDeuda": tipoDeuda,
             "importe": parseFloat(importe)
+            }
         }
 
-        db.collection("MenuItems").add(data).then((docRef) => {
-            resolve(docRef);
-        }).catch((e) => {
-            reject(e);
-        })
+        set(ref(db, 'empresas/' +userId), data);
 
     })
 }
@@ -65,4 +77,4 @@ function DeleteMenuItem(menuItemID) {
     })
 }
 
-export default { getAllMenuItems, getAllMenuCategories, AddNewMenuItem, UpateMenuItem, DeleteMenuItem }
+export default { getAllMenuItems, AddNewMenuItem, UpateMenuItem, DeleteMenuItem }

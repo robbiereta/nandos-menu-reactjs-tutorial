@@ -4,8 +4,8 @@ import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
-import FirestoreService from '../utils/services/FirestoreService';
-import NotLoggedInView from '../components/NoLoggedInView';
+import firebaseServices from '../utils/services/firebaseServices';
+
 
 
 function Dashboard(props) {
@@ -19,7 +19,8 @@ function Dashboard(props) {
     const [currentMenuItem, setCurrentMenuItem] = useState({
         "folio": '',
         "tipoDeuda": '',
-        "importe": 0
+        "importe": 0,
+        "empresa":""
     });
     const [currentMenuItemId, setCurrentMenuItemId] = useState("");
 
@@ -30,23 +31,24 @@ function Dashboard(props) {
             setUser(null);
         }
     })
-
-    function fetchMenuCategories() {
-        setIsLoading(true);
-        FirestoreService.getAllMenuCategories().then((response) => {
-            setIsLoading(false);
-            setMenuCategories(response._delegate._snapshot.docChanges);
-        }).catch((e) => {
-            setIsLoading(false);
-            alert("Error occured while fetching the menu categories. " + e);
-        })
-    }
+var uid=firebase.auth().currentUser.uid
+console.log(uid);
+    // function fetchMenuCategories() {
+    //     setIsLoading(true);
+    //     firebaseServices.getAllMenuCategories().then((response) => {
+    //         setIsLoading(false);
+    //         setMenuCategories(response._delegate._snapshot.docChanges);
+    //     }).catch((e) => {
+    //         setIsLoading(false);
+    //         alert("Error occured while fetching the menu categories. " + e);
+    //     })
+    // }
 
     function fetchMenuItems() {
         setIsLoading(true);
-        FirestoreService.getAllMenuItems().then((response) => {
+        firebaseServices.getAllMenuItems().then((response) => {
             setIsLoading(false);
-            setMenuItems(response._delegate._snapshot.docChanges);
+            setMenuItems(response);
         }).catch((e) => {
             setIsLoading(false);
             alert("Error occured while fetching the menu item. " + e);
@@ -55,9 +57,9 @@ function Dashboard(props) {
 
     useEffect(() => {
         if (user !== null) {
-            if (menuCategories.length <= 0) {
-                fetchMenuCategories();
-            }
+            // if (menuCategories.length <= 0) {
+            //     fetchMenuCategories();
+            // }
             fetchMenuItems();
         }
     }, [user])
@@ -73,18 +75,20 @@ function Dashboard(props) {
         setShowDeleteDialogue(false);
         setCurrentMenuItemId("");
         setAddEditFormType("Add");
-        setCurrentMenuItem({ "folio": '', "tipoDeuda": '', "importe": 0 })
+        setCurrentMenuItem({ "folio": '', "tipoDeuda": '', "importe": 0 , "empresa":""})
         setIsLoading(false);
     }
 
     const handleAddEditFormSubmit = (e) => {
+
         e.preventDefault();
+
         const { folio, tipoDeuda, importe } = e.target.elements;
 
         if (importe.value && folio.value) {
             if (addEditFormType === "Add") {
                 setIsLoading(true);
-                FirestoreService.AddNewMenuItem(folio.value, tipoDeuda.value, importe.value).then(() => {
+                firebaseServices.AddNewMenuItem(folio.value, tipoDeuda.value, importe.value,uid).then(() => {
                 
                     handleModalClose();
                     window.location.reload(false);
@@ -94,7 +98,7 @@ function Dashboard(props) {
                 })
             } else if (addEditFormType === "Edit") {
                 setIsLoading(true);
-                FirestoreService.UpateMenuItem(currentMenuItemId, folio.value, tipoDeuda.value, importe.value).then(() => {
+                firebaseServices.UpateMenuItem(currentMenuItemId, folio.value, tipoDeuda.value, importe.value).then(() => {
                 
                     handleModalClose();
                     window.location.reload(false);
@@ -109,7 +113,7 @@ function Dashboard(props) {
 
     const handleMenuItemDelete = () => {
         setIsLoading(true);
-        FirestoreService.DeleteMenuItem(currentMenuItemId).then(() => {
+        firebaseServices.DeleteMenuItem(currentMenuItemId).then(() => {
             alert(`Deletion Successful`);
             handleModalClose();
             window.location.reload(false);
@@ -131,7 +135,7 @@ function Dashboard(props) {
     return (
         <>
             {/* <h1>You're not logged in. Please <a href="/login">login</a> first then come to dashboard.</h1> */}
-            {(user === null) && <NotLoggedInView />}
+            {(user === null)}
             {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
             {(user !== null) && <>
                 {/* Add/Edit Form START */}
